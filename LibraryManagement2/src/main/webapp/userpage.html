@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Portal</title>
+    <link rel="stylesheet" href="bootstrap.min.css"/>
+    <style>
+        body {
+            background-color: #f1f5f8; /* Light grayish background for the page */
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .top-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #4e73df;
+            margin-bottom: 20px;
+        }
+
+        .nav-menu {
+            list-style-type: none; /* Remove bullets */
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-menu li {
+            margin: 15px 0;
+        }
+
+        /* Button styling */
+        .nav-menu a {
+            text-decoration: none;
+            color: white;
+            background-color: #17a2b8;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 18px;
+            display: inline-block;
+            width: 250px; /* Set consistent button width */
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+
+
+        /* Hover effect to change background color */
+        .nav-menu a:hover {
+            background-color: #007bff; /* Blue background on hover */
+            color: white;
+            transform: scale(1.05); /* Slight scale effect on hover */
+        }
+
+        .nav-menu a:active {
+            background-color: #0056b3; /* Darker blue when button is clicked */
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .footer a {
+            color: #4e73df;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-container">
+    <h1>Welcome to User Portal</h1>
+    <ul class="nav-menu">
+        <li><a href="adminuserviewbook.html">View Books</a></li>
+        <li><a href="usergetbook.html">Get Book</a></li>
+        <li><a href="userreturnbook.html">Return Book</a></li>
+        <li><a href="/api/users/logout">Logout</a></li>
+    </ul>
+</div>
+
+<!--<div class="footer">-->
+<!--    <p>&copy; 2024 User Portal | <a href="#">Privacy Policy</a></p>-->
+<!--</div>-->
+
+<script src="jquery.min.js"></script>
+<script src="bootstrap.min.js"></script>
+
+</body>
+</html>

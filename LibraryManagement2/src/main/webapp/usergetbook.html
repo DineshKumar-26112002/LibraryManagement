@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Book</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f1f5f8; /* Light grayish background */
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+            width: 400px; /* Fixed width for the form */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h3 {
+            text-align: center;
+            color: #4e73df;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .form-group input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            width: 45%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button-container .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .button-container .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .button-container .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .button-container .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h3>Get Book</h3>
+    <form id="bookForm" action="userviewavailablebook.html" method="get">
+        <div class="form-group">
+            <label for="name1">Book Name</label>
+            <input type="text" class="form-control" name="name" id="name1" placeholder="Enter book name" required/>
+        </div>
+
+        <div class="button-container">
+            <button type="button" class="btn btn-secondary" onclick="window.location.href='userpage.html'">Back</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
+<!-- Footer (optional) -->
+<div class="footer">
+    <p>&copy; 2024 Get Book | <a href="#">Privacy Policy</a></p>
+</div>
+
+<script src="jquery.min.js"></script>
+<script src="bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light grayish background */
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h3 {
+            text-align: center;
+            color: #4e73df;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .form-group input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            width: 45%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button-container .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .button-container .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .button-container .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .button-container .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .message-container {
+        text-align: center;
+        background-color: #e3f2fd;
+        color: #2e5b8e;
+        padding: 20px;
+        border: 1px solid #c8e6c9;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-top: 20px; /* Add some space from the top of the screen */
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+          margin-left: auto;
+            margin-right: auto;/* Set a maximum width for responsiveness */
+    }
+    .message-container h1 {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+    .message-container p {
+        font-size: 1rem;
+        margin-top: 10px;
+    }
+    </style>
+</head>
+<body>
+<div class="message-container">
+    <h1 id="message">An One Time Password(OTP) sent to your registered mobile number</h1>
+    <p>You will be redirected shortly...</p>
+</div>
+<div class="container">
+    <h3>Verify OTP</h3>
+    <form action="/api/users/verifyotp" method="post" autocomplete="off">
+        <div class="form-group">
+            <label for="otp">Enter OTP:</label>
+            <input type="text" class="form-control" id="otp" name="otp" placeholder="Enter OTP" required>
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="btn btn-primary">Verify</button>
+        </div>
+    </form>
+</div>
+
+<!-- Footer (optional) -->
+<div class="footer">
+    <p>&copy; 2024 Verify OTP | <a href="#">Privacy Policy</a></p>
+</div>
+
+<script src="jquery.min.js"></script>
+<script src="bootstrap.min.js"></script>
+</body>
+</html>

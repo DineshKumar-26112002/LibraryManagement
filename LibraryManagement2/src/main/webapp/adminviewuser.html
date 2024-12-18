@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Users</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f1f5f8; /* Light grayish background */
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #4e73df;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #e6f7ff;
+        }
+
+        tr:hover {
+            background-color: #d1ecf1;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            width: 150px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        /* Style for the footer (optional) */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 id="heading" style="display: none;">List of Users</h2>
+    <table id="userTable" style="display: none;" class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone No</th>
+            <th>Book Count</th>
+        </tr>
+        </thead>
+        <tbody id="userTableBody">
+        <!-- Data will be dynamically injected here -->
+        </tbody>
+    </table>
+    <button id="backButton" style="display:none" class="btn btn-secondary">Back</button>
+</div>
+
+<!-- Footer (optional) -->
+<div class="footer">
+    <p>&copy; 2024 View Users | <a href="#">Privacy Policy</a></p>
+</div>
+
+<script>
+    // Fetch data from the servlet
+    fetch('/api/users/getusers')
+        .then(response => {
+            if (response.redirected) {
+                // If redirected, navigate to the success page
+                window.location.href = response.url;
+            } else {
+                return response.json(); // Parse the JSON response
+            }
+        })
+        .then(data => {
+            if (data) {
+                const tableBody = document.getElementById('userTableBody');
+                const table = document.getElementById('userTable');
+                const heading = document.getElementById('heading');
+                const backButton = document.getElementById('backButton');
+
+                // Display table and heading if users exist
+                table.style.display = 'table';
+                heading.style.display = 'block';
+                backButton.style.display = 'block';
+
+                // Populate the table with user data
+                data.forEach(user => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${user.id}</td>
+                        <td>${user.name}</td>
+                        <td>${user.email}</td>
+                        <td>${user.mobile}</td>
+                        <td>${user.bookCount}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching users:', error);
+        });
+
+    // Back button functionality
+    document.getElementById('backButton').addEventListener('click', function() {
+        // Check the referring page to decide where to go
+        if (document.referrer.includes('adminpage.html')) {
+            window.location.href = 'adminpage.html';  // Redirect to admin page
+        } else {
+            window.location.href = 'userpage.html';  // Redirect to user page
+        }
+    });
+</script>
+
+</body>
+</html>

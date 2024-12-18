@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book</title>
+    <link rel="stylesheet" href="bootstrap.min.css"/>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Center form vertically and horizontally */
+            height: 100vh; /* Full viewport height */
+            background-color: #f8f9fa; /* Light background for contrast */
+        }
+
+        .container {
+            background-color: #ffffff; /* White background for form */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            width: 400px; /* Consistent form width */
+        }
+
+
+        h3 {
+            text-align: center;
+            color: #4e73df; /* Heading color */
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+             font-size: 14px;
+            font-weight: 600;
+            color: #333; /* Dark color for labels */
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+             width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f7f7f7; /* Light background for inputs */
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+             border-color: #4e73df; /* Focus effect color */
+            background-color: #ffffff;
+        }
+
+        .button-container {
+             display: flex;
+            justify-content: space-between; /* Space out the buttons */
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            width: 48%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container .btn-primary {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+
+        .button-container .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .button-container .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+        }
+
+        .button-container .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h3>Add Book</h3>
+    <form action="/api/books/addbook" method="post">
+        <div class="form-group">
+            <label for="name1">Name</label>
+            <input type="text" class="form-control" name="name" id="name1" placeholder="Book Name" autocomplete="off" required/>
+        </div>
+        <div class="form-group">
+            <label for="author">Author</label>
+            <input type="text" class="form-control" name="author" id="author" placeholder="Author" autocomplete="off" required/>
+        </div>
+        <div class="form-group">
+            <label for="publisher">Publisher</label>
+            <input type="text" class="form-control" name="publisher" id="publisher" placeholder="Publisher" autocomplete="off" required/>
+        </div>
+        <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Quantity" autocomplete="off" required/>
+        </div>
+
+        <div class="button-container">
+            <button type="button" class="btn btn-secondary" onclick="window.location.href='adminpage.html'">Back</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
+<!-- Footer (optional) -->
+<!--<div class="footer">-->
+<!--    <p>&copy; 2024 Add Book | <a href="#">Privacy Policy</a></p>-->
+<!--</div>-->
+
+<script>
+    window.onload = function() {
+        if (window.history && window.history.pushState) {
+            window.history.pushState(null, null, window.location.href);
+            window.onpopstate = function() {
+                window.location.replace("index.html"); // Redirect to the login page if they try to go back
+            };
+        }
+    };
+</script>
+
+<script src="jquery.min.js"></script>
+<script src="bootstrap.min.js"></script>
+</body>
+</html>

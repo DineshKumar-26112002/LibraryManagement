@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Available Books</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background for contrast */
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 40px;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #4e73df;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #e6f7ff;
+        }
+
+        tr:hover {
+            background-color: #d1ecf1;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            width: 150px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 id="abc" style="display: none;">Available Books</h2>
+
+    <!-- Only show the table if books are available -->
+    <table id="booksTable" class="table table-striped" style="display: none;">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publisher</th>
+            <th>Quantity</th>
+            <th>Get Book</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Rows will be dynamically populated -->
+        </tbody>
+    </table>
+
+    <button id="backButton" style="display:none" class="btn btn-secondary" onclick="window.location.href='userpage.html'">Back</button>
+</div>
+
+<script>
+    // Function to get URL parameter
+    function getQueryParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    // Retrieve the book name from the URL query parameter
+    const bookName = getQueryParameter('name');
+
+    // Fetch available books from the GetBook servlet using the book name as a query parameter
+    fetch('/api/books/getbookbyname?name=' + encodeURIComponent(bookName))  // Send book name as URL parameter
+    .then(response => {
+        if (response.redirected) {
+            // If redirected, navigate to the new URL
+            window.location.href = response.url;
+        } else {
+            return response.json(); // Parse the JSON response
+        }
+    })
+    .then(data => {
+        if(data) {
+            const tableBody = document.querySelector('#booksTable tbody');
+            const table = document.getElementById('booksTable');
+            const header = document.getElementById('abc');
+            const backButton = document.getElementById('backButton');
+
+            // Clear existing rows
+
+                // Show the table and header if books are found
+                table.style.display = 'table';
+                header.style.display = 'block';
+                backButton.style.display = 'block';
+
+                data.forEach(book => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${book.id}</td>
+                        <td>${book.name}</td>
+                        <td>${book.author}</td>
+                        <td>${book.publisher}</td>
+                        <td>${book.quantity}</td>
+                        <td>
+                            <button class="btn btn-primary" onclick="issueBook(${book.id})">Get Book</button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching books:', error);
+         // Redirect to user page on error
+    });
+
+    // Function to handle the form submission when 'Get Book' is clicked
+    function issueBook(bookId) {
+        // Create a form element dynamically
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/api/books/issuebook';  // The URL of the IssueBook servlet
+
+        // Create hidden input fields for bookId
+        const bookIdField = document.createElement('input');
+        bookIdField.type = 'hidden';
+        bookIdField.name = 'bookId';
+        bookIdField.value = bookId;
+
+        // Append the inputs to the form
+        form.appendChild(bookIdField);
+
+        // Append the form to the body (it won't be visible)
+        document.body.appendChild(form);
+
+        // Submit the form
+        form.submit();
+    }
+</script>
+
+</body>
+</html>

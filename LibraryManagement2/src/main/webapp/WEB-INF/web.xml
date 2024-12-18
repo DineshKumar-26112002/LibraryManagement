@@ -20,4 +20,14 @@
     <servlet-name>jersey-servlet</servlet-name>
     <url-pattern>/api/*</url-pattern>
   </servlet-mapping>
+         <filter>
+    <filter-name>SessionValidationFilter</filter-name>
+    <filter-class>com.librarymanagement.filter.SessionValidationFilter</filter-class>
+  </filter>
+
+  <!-- Filter mapping -->
+  <filter-mapping>
+    <filter-name>SessionValidationFilter</filter-name>
+    <url-pattern>/.html*</url-pattern> <!-- This ensures the filter applies to all requests -->
+  </filter-mapping>
 </web-app>

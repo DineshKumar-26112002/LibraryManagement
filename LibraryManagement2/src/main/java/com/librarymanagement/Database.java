@@ -41,6 +41,18 @@ public class Database {
     public void setSession(HttpSession session) {
         this.session = session;
     }
+    public void sendOtpToMobile(String mobile, String otp) {
+        final String ACCOUNT_SID = "Your twilio account sid";
+        final String AUTH_TOKEN = "Your twilio account auth token";
+        final String TWILIO_PHONENO = "Your twilio account mobile number";
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        Message message = Message.creator(
+                        new com.twilio.type.PhoneNumber("+91" + mobile),  // To: Replace with recipient's phone number
+                        new com.twilio.type.PhoneNumber(TWILIO_PHONENO), // From: Your Twilio phone number
+                        "Your OTP for LibrarayManagement Login is " + otp)                     // Message body
+                .create();
+        System.out.println("Message Sent! SID: " + message.getSid());
+    }
     public String generateOtp(int otpLength) {
         Random random = new Random();
         StringBuilder otp = new StringBuilder();

@@ -38,7 +38,7 @@ The system implements **2-Step Authentication** for secure login and utilizes em
 ## Technologies Used
 
 - **Backend**: Java (Jersey Framework)
-- **Frontend**: JSP (Java Server Pages)
+- **Frontend**: HTML,CSS,JAVASCRIPT
 - **Database**: MySQL
 - **Email Service**: JavaMail API
 - **PDF Generation**: iText Library
